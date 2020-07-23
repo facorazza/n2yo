@@ -8,10 +8,10 @@ class N2YO:
 
     def __init__(self, api_key, latitude=None, longitude=None, altitude=None):
         self.api_key = api_key
-        self.lat = lat
-        self.lon = lon
-        self.alt = alt
-        self.transactionscount = 0
+        self.latitude = latitude
+        self.longitude = longitude
+        self.altitude = altitude
+        self.transactions_count = 0
         self.params = {'apiKey': self.api_key}
 
     def get_TLE(self, id):
@@ -40,7 +40,10 @@ class N2YO:
 
         return r['info'], r['tle']
 
-    def get_positions(self, id, seconds, lat=None, lon=None, alt=None):
+    def get_positions(
+        self, id, seconds,
+        latitude=None, longitude=None, altitude=None
+    ):
         '''
         Retrieve the future positions of any satellite as footprints (latitude, longitude) to display orbits on maps. Also return the satellite's azimuth and elevation with respect to the observer location. Each element in the response array is one second of calculation. First element is calculated for current UTC time.
 
@@ -67,15 +70,15 @@ class N2YO:
         dec	                float	Satellite declination (degrees)
         timestamp	        integer	Unix time for this position (seconds). You should convert this UTC value to observer's time zone
         '''
-        if lat is None:
-            lat = self.lat
-        if lon is None:
-            lon = self.lon
-        if alt is None:
-            alt = self.alt
+        if latitude is None:
+            latitude = self.latitude
+        if longitude is None:
+            longitude = self.longitude
+        if altitude is None:
+            altitude = self.altitude
 
         r = requests.get(
-            f'{N2YO.API_URL}positions/{id}/{lat}/{lon}/{alt}/{seconds}',
+            f'{N2YO.API_URL}positions/{id}/{latitude}/{longitude}/{altitude}/{seconds}',
         ).json()
 
         self.transactions_count = r['info']['transactionscount']
@@ -104,7 +107,8 @@ class N2YO:
         return r['info'], ans
 
     def get_visualpasses(
-        self, id, days, min_visibility, lat=None, lon=None, alt=None
+        self, id, days, min_visibility,
+        latitude=None, longitude=None, altitude=None
     ):
         '''
         Get predicted visual passes for any satellite relative to a location on Earth. A 'visual pass' is a pass that should be optically visible on the entire (or partial) duration of crossing the sky. For that to happen, the satellite must be above the horizon, illumintaed by Sun (not in Earth shadow), and the sky dark enough to allow visual satellite observation.
@@ -141,15 +145,15 @@ class N2YO:
         mag	                float	Max visual magnitude of the pass, same scale as star brightness. If magnitude cannot be determined, the value is 100000
         duration	        integer	Total visible duration of this pass (in seconds)
         '''
-        if lat is None:
-            lat = self.lat
-        if lon is None:
-            lon = self.lon
-        if alt is None:
-            alt = self.alt
+        if latitude is None:
+            latitude = self.latitude
+        if longitude is None:
+            longitude = self.longitude
+        if altitude is None:
+            altitude = self.altitude
 
         r = requests.get(
-            f'{N2YO.API_URL}visualpasses/{id}/{lat}/{lon}/{alt}/{days}/{min_visibility}',
+            f'{N2YO.API_URL}visualpasses/{id}/{latitude}/{longitude}/{altitude}/{days}/{min_visibility}',
             params=self.params
         ).json()
 
@@ -163,7 +167,8 @@ class N2YO:
         return r['info'], passes
 
     def get_radiopasses(
-        self, id, days, min_elevation, lat=None, lon=None, alt=None
+        self, id, days, min_elevation,
+        latitude=None, longitude=None, altitude=None
     ):
         '''
         The 'radio passes' are similar to 'visual passes', the only difference being the requirement for the objects to be optically visible for observers. This function is useful mainly for predicting satellite passes to be used for radio communications. The quality of the pass depends essentially on the highest elevation value during the pass, which is one of the input parameters.
@@ -196,15 +201,15 @@ class N2YO:
         endAzCompass	    string	Satellite azimuth for the end of this pass (relative to the observer). Possible values: N, NE, E, SE, S, SW, W, NW
         endUTC	            integer	Unix time for the end of this pass. You should convert this UTC value to observer's time zone
         '''
-        if lat is None:
-            lat = self.lat
-        if lon is None:
-            lon = self.lon
-        if alt is None:
-            alt = self.alt
+        if latitude is None:
+            latitude = self.latitude
+        if longitude is None:
+            longitude = self.longitude
+        if altitude is None:
+            altitude = self.altitude
 
         r = requests.get(
-            f'{N2YO.API_URL}radiopasses/{id}/{lat}/{lon}/{alt}/{days}/{min_elevation}',
+            f'{N2YO.API_URL}radiopasses/{id}/{latitude}/{longitude}/{altitude}/{days}/{min_elevation}',
             params=self.params
         ).json()
 
@@ -221,8 +226,9 @@ class N2YO:
         self,
         search_radius=90,
         category_id=N2YOSatelliteCategory.All,
-        lat=None, lon=None,
-        alt=None
+        latitude=None,
+        longitude=None,
+        altitude=None
     ):
         '''
         The 'above' function will return all objects within a given search radius above observer's location. The radius (θ), expressed in degrees, is measured relative to the point in the sky directly above an observer (azimuth).
@@ -252,15 +258,15 @@ class N2YO:
         satlat	            float	Satellite altitude (km)
 
         '''
-        if lat is None:
-            lat = self.lat
-        if lon is None:
-            lon = self.lon
-        if alt is None:
-            alt = self.alt
+        if latitude is None:
+            latitude = self.latitude
+        if longitude is None:
+            longitude = self.longitude
+        if altitude is None:
+            altitude = self.altitude
 
         r = requests.get(
-            f'{N2YO.API_URL}above/{lat}/{lon}/{alt}/{search_radius}/{category_id}',
+            f'{N2YO.API_URL}above/{latitude}/{longitude}/{altitude}/{search_radius}/{category_id}',
             params=self.params
         ).json()
 
