@@ -14,7 +14,7 @@ class N2YO:
         self.transactions_count = 0
         self.params = {'apiKey': self.api_key}
 
-    def get_TLE(self, id):
+    def get_tle(self, id):
         '''
         Retrieve the Two Line Elements (TLE) for a satellite identified by NORAD id.
 
@@ -40,7 +40,7 @@ class N2YO:
 
         return r['info'], r['tle']
 
-    def get_positions(
+    def get_satellite_positions(
         self, id, seconds,
         latitude=None, longitude=None, altitude=None
     ):
@@ -107,7 +107,7 @@ class N2YO:
 
         return r['info'], ans
 
-    def get_visualpasses(
+    def get_visual_passes(
         self, id, days, min_visibility,
         latitude=None, longitude=None, altitude=None
     ):
@@ -167,7 +167,7 @@ class N2YO:
 
         return r['info'], passes
 
-    def get_radiopasses(
+    def get_radio_passes(
         self, id, days, min_elevation,
         latitude=None, longitude=None, altitude=None
     ):
