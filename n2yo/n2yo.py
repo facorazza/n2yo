@@ -6,13 +6,13 @@ from .satellite_categories import N2YOSatelliteCategory
 class N2YO:
     API_URL = 'https://www.n2yo.com/rest/v1/satellite/'
 
-    def __init__(self, apikey, lat=None, lon=None, alt=None):
-        self.apikey = apikey
+    def __init__(self, api_key, latitude=None, longitude=None, altitude=None):
+        self.api_key = api_key
         self.lat = lat
         self.lon = lon
         self.alt = alt
         self.transactionscount = 0
-        self.params = {'apiKey': self.apikey}
+        self.params = {'apiKey': self.api_key}
 
     def get_TLE(self, id):
         '''
