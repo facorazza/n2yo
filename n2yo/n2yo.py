@@ -2,10 +2,10 @@ import requests
 
 from .satellite_categories import N2YOSatelliteCategory
 
+API_URL = 'https://www.n2yo.com/rest/v1/satellite/'
+
 
 class N2YO:
-    API_URL = 'https://www.n2yo.com/rest/v1/satellite/'
-
     def __init__(self, api_key, latitude=None, longitude=None, altitude=None):
         self.api_key = api_key
         self.latitude = latitude
@@ -32,7 +32,7 @@ class N2YO:
         tle	                string	TLE on single line string. Split the line in two by \r\n to get original two lines
         '''
         r = requests.get(
-            f'{N2YO.API_URL}tle/{id}',
+            f'{API_URL}tle/{id}',
             params=self.params
         ).json()
 
@@ -78,7 +78,7 @@ class N2YO:
             altitude = self.altitude
 
         r = requests.get(
-            f'{N2YO.API_URL}positions/{id}/{latitude}/{longitude}/{altitude}/{seconds}',
+            f'{API_URL}positions/{id}/{latitude}/{longitude}/{altitude}/{seconds}',
             params=self.params
         ).json()
 
@@ -154,7 +154,7 @@ class N2YO:
             altitude = self.altitude
 
         r = requests.get(
-            f'{N2YO.API_URL}visualpasses/{id}/{latitude}/{longitude}/{altitude}/{days}/{min_visibility}',
+            f'{API_URL}visualpasses/{id}/{latitude}/{longitude}/{altitude}/{days}/{min_visibility}',
             params=self.params
         ).json()
 
@@ -210,7 +210,7 @@ class N2YO:
             altitude = self.altitude
 
         r = requests.get(
-            f'{N2YO.API_URL}radiopasses/{id}/{latitude}/{longitude}/{altitude}/{days}/{min_elevation}',
+            f'{API_URL}radiopasses/{id}/{latitude}/{longitude}/{altitude}/{days}/{min_elevation}',
             params=self.params
         ).json()
 
@@ -267,7 +267,7 @@ class N2YO:
             altitude = self.altitude
 
         r = requests.get(
-            f'{N2YO.API_URL}above/{latitude}/{longitude}/{altitude}/{search_radius}/{category_id}',
+            f'{API_URL}above/{latitude}/{longitude}/{altitude}/{search_radius}/{category_id}',
             params=self.params
         ).json()
 
