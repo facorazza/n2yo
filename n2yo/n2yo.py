@@ -79,6 +79,7 @@ class N2YO:
 
         r = requests.get(
             f'{N2YO.API_URL}positions/{id}/{latitude}/{longitude}/{altitude}/{seconds}',
+            params=self.params
         ).json()
 
         self.transactions_count = r['info']['transactionscount']
