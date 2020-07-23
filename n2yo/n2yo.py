@@ -35,7 +35,9 @@ class N2YO:
             f'{N2YO.API_URL}tle/{id}',
             params=self.params
         ).json()
-        self.transactionscount = r['info']['transactionscount']
+
+        self.transactions_count = r['info']['transactionscount']
+
         return r['info'], r['tle']
 
     def get_positions(self, id, seconds, lat=None, lon=None, alt=None):
@@ -75,7 +77,8 @@ class N2YO:
         r = requests.get(
             f'{N2YO.API_URL}positions/{id}/{lat}/{lon}/{alt}/{seconds}',
         ).json()
-        self.transactionscount = r['info']['transactionscount']
+
+        self.transactions_count = r['info']['transactionscount']
 
         positions = []
         azels = []
@@ -149,7 +152,8 @@ class N2YO:
             f'{N2YO.API_URL}visualpasses/{id}/{lat}/{lon}/{alt}/{days}/{min_visibility}',
             params=self.params
         ).json()
-        self.transactionscount = r['info']['transactionscount']
+
+        self.transactions_count = r['info']['transactionscount']
 
         if 'passes' in r.keys():
             passes = r['passes']
@@ -203,7 +207,8 @@ class N2YO:
             f'{N2YO.API_URL}radiopasses/{id}/{lat}/{lon}/{alt}/{days}/{min_elevation}',
             params=self.params
         ).json()
-        self.transactionscount = r['info']['transactionscount']
+
+        self.transactions_count = r['info']['transactionscount']
 
         if 'passes' in r.keys():
             passes = r['passes']
@@ -258,7 +263,9 @@ class N2YO:
             f'{N2YO.API_URL}above/{lat}/{lon}/{alt}/{search_radius}/{category_id}',
             params=self.params
         ).json()
-        self.transactionscount = r['info']['transactionscount']
+
+        self.transactions_count = r['info']['transactionscount']
+
         if 'above' in r.keys():
             above = r['above']
         else:
