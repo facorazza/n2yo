@@ -1,5 +1,7 @@
 # N2YO Python API
 
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/facorazza/n2yo-api/HEAD?filepath=examples.ipynb)
+
 This python package is a wrapper to access the N2YO REST API.
 
 For each transaction, the caller must be identified and authorized by a license key (API key). To generate a unique license key, users are requested first to register an account at [n2yo](n2yo.com). After login, please visit the profile page and scroll down to access the button that generates the API key. The new API key will be accessible in the profile and cannot be changed. If you need a new key, please contact us and provide an explanation.
