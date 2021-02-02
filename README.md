@@ -1,6 +1,6 @@
 # N2YO Python API
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/facorazza/n2yo-api/HEAD?filepath=examples.ipynb)
+![Python package](https://github.com/facorazza/n2yo-api/workflows/Python%20package/badge.svg) [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/facorazza/n2yo-api/HEAD?filepath=examples.ipynb)
 
 This python package is a wrapper to access the N2YO REST API.
 
