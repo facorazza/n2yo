@@ -5,7 +5,7 @@ with open('README.md', 'r') as fh:
 
 setuptools.setup(
     name='n2yo-api',
-    version='0.1.1',
+    version='0.1.3',
     author='F. A. Corazza',
     author_email='federico.corazza@live.it',
     description='Python wrapper for the N2YO API.',
